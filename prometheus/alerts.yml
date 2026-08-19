@@ -1,0 +1,23 @@
+groups:
+  - name: cron
+    rules:
+      # The whole point: the alert carries the captured error, not just exit=1.
+      - alert: CronJobFailed
+        expr: cron_sh_last_exit != 0
+        for: 0m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'cron job {{ $labels.job }} failed (exit {{ $value }})'
+          description: '{{ $labels.job }} failed — {{ $labels.reason }}'
+
+      # Fires when a job that should run regularly goes silent. A job that never
+      # runs never reports exit != 0, so staleness needs its own alert.
+      - alert: CronJobStale
+        expr: time() - cron_sh_last_run_timestamp_seconds > 3600
+        for: 5m
+        labels:
+          severity: warning
+        annotations:
+          summary: 'cron job {{ $labels.job }} has not reported in over an hour'
+          description: 'last run {{ $labels.job }} was {{ $value | humanizeDuration }} ago'
