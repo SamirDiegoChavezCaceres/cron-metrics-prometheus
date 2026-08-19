@@ -10,6 +10,10 @@ the last line of stderr, then pushes those to a Prometheus Pushgateway. The
 alert rule carries that error line as a label, so the page says
 `backup failed - ERROR: disk full` instead of `exit=1`.
 
+## Demo
+
+![demo](assets/demo.gif)
+
 ## The problem it solves
 
 The usual cron-to-Prometheus setup pushes `last_exit`, you alert on
