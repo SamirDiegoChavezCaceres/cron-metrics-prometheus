@@ -6,10 +6,7 @@ failed, not just that it did.
 A wrapper runs your job, captures its exit code, duration, and - on failure -
 the last line of stderr, then pushes those to a Prometheus Pushgateway. The
 alert rule carries that error line as a label, so the page says
-`backup failed — ERROR: disk full` instead of `exit=1`.
-
-Everything here is a from-scratch, vendor-neutral rewrite of a pattern I shipped
-in production.
+`backup failed - ERROR: disk full` instead of `exit=1`.
 
 ## The problem it solves
 
@@ -50,7 +47,7 @@ otherwise corrupt the Prometheus exposition payload.
 ## Alerts (`prometheus/alerts.yml`)
 
 - **CronJobFailed** - `cron_sh_last_exit != 0`; the annotation is
-  `{{ $labels.job }} failed — {{ $labels.reason }}`.
+  `{{ $labels.job }} failed: {{ $labels.reason }}`.
 - **CronJobStale** - a job that stops running never reports a failure, so
   staleness (`time() - last_run > 1h`) gets its own alert.
 

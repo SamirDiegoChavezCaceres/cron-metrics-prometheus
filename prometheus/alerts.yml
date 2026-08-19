@@ -9,7 +9,7 @@ groups:
           severity: warning
         annotations:
           summary: 'cron job {{ $labels.job }} failed (exit {{ $value }})'
-          description: '{{ $labels.job }} failed — {{ $labels.reason }}'
+          description: '{{ $labels.job }} failed: {{ $labels.reason }}'
 
       # Fires when a job that should run regularly goes silent. A job that never
       # runs never reports exit != 0, so staleness needs its own alert.
