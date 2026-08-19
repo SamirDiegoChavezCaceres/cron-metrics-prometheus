@@ -76,6 +76,14 @@ bash tests/test_sanitize.sh
 Covers the sanitizer: multi-line collapse, quote and backslash escaping, and
 truncation - the parts that would otherwise break the metrics payload.
 
+## Limitations and next steps
+
+- The reason label carries only the last stderr line, so a multi-line root cause
+  is truncated.
+- Free-text reasons can create many time series; the sanitizer caps length to
+  keep cardinality down, but very varied messages still add series.
+- Next: ship a Grafana dashboard JSON and an Alertmanager routing example.
+
 ## License
 
 MIT.
