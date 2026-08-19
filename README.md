@@ -1,5 +1,7 @@
 # cron-metrics-prometheus
 
+[![CI](https://github.com/SamirDiegoChavezCaceres/cron-metrics-prometheus/actions/workflows/ci.yml/badge.svg)](https://github.com/SamirDiegoChavezCaceres/cron-metrics-prometheus/actions/workflows/ci.yml) ![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+
 Turn any cron job into a monitored one, and make the alert tell you **why** it
 failed, not just that it did.
 
