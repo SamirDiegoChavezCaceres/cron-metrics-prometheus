@@ -60,7 +60,7 @@ docker compose up -d          # pushgateway :9091, prometheus :9090, grafana :30
 PUSHGATEWAY_URL=http://localhost:9091 \
   ./scripts/run-cron.sh demo_job -- ./examples/demo-job.sh    # a job that fails on purpose
 curl -s localhost:9091/metrics | grep cron_sh_last_exit
-# cron_sh_last_exit{job="demo_job",reason="ERROR: connection to database timed out after 30s"} 1
+# cron_sh_last_exit{instance="",job="demo_job",reason="ERROR: connection to database timed out after 30s"} 1
 ```
 
 Open Prometheus at http://localhost:9090/alerts to watch `CronJobFailed` fire
