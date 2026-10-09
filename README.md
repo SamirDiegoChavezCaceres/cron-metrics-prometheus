@@ -14,6 +14,13 @@ alert rule carries that error line as a label, so the page says
 
 ![demo](assets/demo.gif)
 
+The demo (`bash scripts/demo.sh`) needs no Docker. It (1) runs a deliberately
+failing example job through `run-cron.sh`, which captures the job's real last
+stderr line and turns it into the alert `reason` alongside the exit code, and (2)
+runs the sanitizer test, showing that reason escaped safely into the Prometheus
+text exposition format. The full live stack (Pushgateway + Prometheus + Grafana)
+is in `docker-compose.yml`.
+
 ## The problem it solves
 
 The usual cron-to-Prometheus setup pushes `last_exit`, you alert on
